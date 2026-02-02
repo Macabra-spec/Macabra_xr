@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Macabra_XR Painel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #2a0a1a 0%, #4a1a2a 50%, #2a0a1a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Efeito desfocado no fundo */
+        body::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(139, 0, 0, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            top: 20%;
+            left: 10%;
+            filter: blur(60px);
+            animation: float 8s ease-in-out infinite;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(178, 34, 34, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: 20%;
+            right: 15%;
+            filter: blur(50px);
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0);
+            }
+            50% {
+                transform: translate(30px, -30px);
+            }
+        }
+
+        .container {
+            text-align: center;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(139, 0, 0, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo {
+            margin-bottom: 50px;
+        }
+
+        .logo h1 {
+            font-size: 3em;
+            color: #8B0000;
+            text-shadow: 0 0 20px rgba(139, 0, 0, 0.5);
+            margin-bottom: 5px;
+            letter-spacing: 2px;
+        }
+
+        .logo h2 {
+            font-size: 1.8em;
+            color: #B22222;
+            text-shadow: 0 0 10px rgba(178, 34, 34, 0.4);
+            font-weight: 300;
+        }
+
+        .whatsapp-section {
+            margin: 40px 0;
+            padding: 30px;
+            background: rgba(139, 0, 0, 0.1);
+            border-radius: 15px;
+            border: 1px solid rgba(139, 0, 0, 0.2);
+        }
+
+        .whatsapp-link {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #8B0000 0%, #B22222 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.3em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(139, 0, 0, 0.4);
+        }
+
+        .whatsapp-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(139, 0, 0, 0.6);
+            background: linear-gradient(135deg, #A00000 0%, #C83232 100%);
+        }
+
+        .social-links {
+            margin-top: 40px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .social-link {
+            display: inline-block;
+            padding: 12px 30px;
+            background: rgba(139, 0, 0, 0.2);
+            color: #FFB6C1;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(139, 0, 0, 0.3);
+        }
+
+        .social-link:hover {
+            background: rgba(139, 0, 0, 0.4);
+            color: white;
+            transform: translateY(-2px);
+            border-color: rgba(139, 0, 0, 0.5);
+        }
+
+        @media (max-width: 600px) {
+            .logo h1 {
+                font-size: 2.2em;
+            }
+            
+            .logo h2 {
+                font-size: 1.4em;
+            }
+
+            .social-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <h1>Macabra_XR</h1>
+            <h2>Painel</h2>
+        </div>
+
+        <div class="whatsapp-section">
+            <a href="https://wa.me/258868101222" class="whatsapp-link" target="_blank">
+                📱 +258 868 101 222
+            </a>
+            <p style="color: #FFB6C1; margin-top: 15px; font-size: 0.9em;">
+                Clique para fazer sua compra
+            </p>
+        </div>
+
+        <div class="social-links">
+            <a href="https://instagram.com/macabra_xr" class="social-link" target="_blank">
+                📷 Instagram
+            </a>
+            <a href="https://tiktok.com/@macabra777_" class="social-link" target="_blank">
+                🎵 TikTok
+            </a>
+        </div>
+    </div>
+</body>
+</html>
