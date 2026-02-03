@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Macabra_XR Painel</title>
+    <title>Macabra_XR</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -14,12 +15,10 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             background: linear-gradient(135deg, #2a0a1a 0%, #4a1a2a 50%, #2a0a1a 100%);
             position: relative;
-            overflow: hidden;
+            overflow-x: hidden;
+            padding: 20px;
         }
 
         /* Efeito desfocado no fundo */
@@ -34,6 +33,7 @@
             left: 10%;
             filter: blur(60px);
             animation: float 8s ease-in-out infinite;
+            z-index: 0;
         }
 
         body::after {
@@ -47,6 +47,7 @@
             right: 15%;
             filter: blur(50px);
             animation: float 10s ease-in-out infinite reverse;
+            z-index: 0;
         }
 
         @keyframes float {
@@ -58,29 +59,29 @@
             }
         }
 
-        .container {
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-section {
             text-align: center;
-            padding: 40px;
+            padding: 40px 20px;
             background: rgba(0, 0, 0, 0.4);
             border-radius: 20px;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(139, 0, 0, 0.3);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-            max-width: 500px;
-            width: 90%;
-            position: relative;
-            z-index: 1;
-        }
-
-        .logo {
-            margin-bottom: 50px;
+            margin-bottom: 30px;
         }
 
         .logo h1 {
             font-size: 3em;
             color: #8B0000;
             text-shadow: 0 0 20px rgba(139, 0, 0, 0.5);
-            margin-bottom: 5px;
+            margin-bottom: 10px;
             letter-spacing: 2px;
         }
 
@@ -89,10 +90,11 @@
             color: #B22222;
             text-shadow: 0 0 10px rgba(178, 34, 34, 0.4);
             font-weight: 300;
+            margin-bottom: 40px;
         }
 
-        .whatsapp-section {
-            margin: 40px 0;
+        .contact-section {
+            margin: 30px 0;
             padding: 30px;
             background: rgba(139, 0, 0, 0.1);
             border-radius: 15px;
@@ -110,6 +112,7 @@
             font-weight: bold;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(139, 0, 0, 0.4);
+            margin-bottom: 10px;
         }
 
         .whatsapp-link:hover {
@@ -118,15 +121,24 @@
             background: linear-gradient(135deg, #A00000 0%, #C83232 100%);
         }
 
+        .contact-text {
+            color: #FFB6C1;
+            margin-top: 15px;
+            font-size: 0.9em;
+        }
+
         .social-links {
-            margin-top: 40px;
+            margin-top: 30px;
             display: flex;
             gap: 20px;
             justify-content: center;
+            flex-wrap: wrap;
         }
 
         .social-link {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             padding: 12px 30px;
             background: rgba(139, 0, 0, 0.2);
             color: #FFB6C1;
@@ -144,6 +156,508 @@
             border-color: rgba(139, 0, 0, 0.5);
         }
 
+        /* ESTILOS DO PAINEL - Adaptado para cores do Macabra_XR */
+        .panel-container {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(139, 0, 0, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .card {
+            max-width: 400px;
+            margin: 0 auto;
+            background: rgba(26, 0, 0, 0.6);
+            border-radius: 12px;
+            border: 1px solid rgba(139, 0, 0, 0.3);
+            box-shadow: rgba(139, 0, 0, 0.3) 0 0 20px, 
+                        rgba(0, 0, 0, 0.8) 0 10px 40px;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #8B0000, transparent);
+            animation: neonFlow 3s linear infinite;
+        }
+
+        @keyframes neonFlow {
+            0% { background-position: -100px 0; }
+            100% { background-position: 100px 0; }
+        }
+
+        .titlebar {
+            background: linear-gradient(90deg, #2a0a1a, #8B0000, #2a0a1a);
+            padding: 12px;
+            text-align: center;
+            font-weight: 600;
+            text-shadow: 0 0 10px rgba(139, 0, 0, 0.8);
+            letter-spacing: 1px;
+            color: white;
+            font-size: 1.2em;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 60px 1fr;
+            gap: 8px;
+            padding: 15px;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .tabbtn {
+            width: 42px;
+            height: 42px;
+            border-radius: 8px;
+            border: 0;
+            cursor: pointer;
+            background: rgba(34, 0, 0, 0.8);
+            color: #FFB6C1;
+            font-size: 16px;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .tabbtn:hover {
+            background: rgba(139, 0, 0, 0.4);
+            transform: translateY(-2px);
+            box-shadow: rgba(139, 0, 0, 0.5) 0 5px 15px;
+        }
+
+        .tabbtn.active {
+            background: #8B0000;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(139, 0, 0, 0.8);
+            animation: pulse 2s ease infinite;
+            color: white;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(139, 0, 0, 0.8); }
+            50% { box-shadow: 0 0 30px rgba(139, 0, 0, 0.8); }
+        }
+
+        .main {
+            padding: 4px 8px 8px 0;
+            overflow-y: auto;
+            max-height: 350px;
+        }
+
+        .sep {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #8B0000, transparent);
+            margin: 6px 0 10px;
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        #aim .row {
+            display: grid;
+            grid-template-columns: 1fr;
+            align-items: center;
+            row-gap: 12px;
+        }
+
+        #aim .row.radio {
+            grid-template-columns: 1fr 1fr;
+            margin-top: 8px;
+        }
+
+        #aim .row.radio .ck {
+            justify-content: center;
+        }
+
+        .ck {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            font-size: 15px;
+            padding: 8px;
+            border-radius: 6px;
+            transition: 0.3s;
+            color: #FFB6C1;
+        }
+
+        .ck:hover {
+            background: rgba(139, 0, 0, 0.2);
+            transform: translateX(5px);
+        }
+
+        .ck input {
+            display: none;
+        }
+
+        .ck span.box {
+            width: 22px;
+            height: 22px;
+            border-radius: 4px;
+            background: rgba(26, 0, 0, 0.8);
+            border: 2px solid rgba(139, 0, 0, 0.5);
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .ck input:checked + span.box {
+            background: #8B0000;
+            border-color: #B22222;
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(139, 0, 0, 0.8);
+            animation: neonGlow 1.5s ease infinite alternate;
+        }
+
+        @keyframes neonGlow {
+            0% { box-shadow: 0 0 10px rgba(139, 0, 0, 0.8); }
+            100% { box-shadow: 0 0 20px rgba(139, 0, 0, 0.8); }
+        }
+
+        .ck input:checked + span.box::after {
+            content: "✓";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        select {
+            background: rgba(26, 0, 0, 0.8);
+            color: #FFB6C1;
+            border: 2px solid rgba(139, 0, 0, 0.5);
+            border-radius: 6px;
+            padding: 8px 12px;
+            height: 32px;
+            font-size: 15px;
+            transition: 0.3s;
+            width: 100%;
+        }
+
+        select:focus {
+            border-color: #8B0000;
+            outline: none;
+            box-shadow: 0 0 15px rgba(139, 0, 0, 0.6);
+        }
+
+        .bone-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            width: 100%;
+            margin-bottom: 8px;
+        }
+
+        .bone-label {
+            min-width: 60px;
+            font-size: 14px;
+            color: #FFB6C1;
+            text-shadow: 0 0 5px rgba(139, 0, 0, 0.6);
+        }
+
+        .section h4 {
+            margin: 6px 0;
+            color: #B22222;
+            font-weight: 600;
+            text-shadow: 0 0 10px rgba(139, 0, 0, 0.6);
+            letter-spacing: 1px;
+        }
+
+        .injection-buttons {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .btn-inject {
+            flex: 1;
+            padding: 12px;
+            background: linear-gradient(145deg, rgba(34, 0, 0, 0.8), rgba(26, 0, 0, 0.8));
+            border: 2px solid rgba(139, 0, 0, 0.5);
+            border-radius: 8px;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-inject:hover {
+            background: linear-gradient(145deg, rgba(139, 0, 0, 0.6), rgba(178, 34, 34, 0.6));
+            border-color: #8B0000;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(139, 0, 0, 0.6);
+        }
+
+        .btn-inject:active {
+            transform: translateY(-1px);
+        }
+
+        .btn-inject::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(139, 0, 0, 0.3), transparent);
+            transition: 0.5s;
+        }
+
+        .btn-inject:hover::before {
+            left: 100%;
+        }
+
+        .btn-icon {
+            display: flex;
+            align-items: center;
+            filter: drop-shadow(0 0 5px rgba(139, 0, 0, 0.8));
+        }
+
+        .injection-status {
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(17, 0, 0, 0.8);
+            border-radius: 8px;
+            border: 1px solid rgba(139, 0, 0, 0.5);
+            animation: neonPulse 2s ease infinite;
+        }
+
+        @keyframes neonPulse {
+            0%, 100% {
+                border-color: rgba(139, 0, 0, 0.5);
+                box-shadow: transparent 0 0 10px;
+            }
+            50% {
+                border-color: #8B0000;
+                box-shadow: 0 0 15px rgba(139, 0, 0, 0.6);
+            }
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #injection-icon {
+            display: flex;
+            align-items: center;
+        }
+
+        #injection-status {
+            font-size: 14px;
+            color: #FFB6C1;
+            text-shadow: 0 0 5px rgba(139, 0, 0, 0.6);
+        }
+
+        .status-injecting #injection-icon svg {
+            animation: spin 1s linear infinite;
+            filter: drop-shadow(0 0 8px rgba(139, 0, 0, 0.8));
+        }
+
+        .status-success #injection-icon svg circle {
+            stroke: rgb(0, 255, 0);
+            fill: rgb(0, 255, 0);
+            filter: drop-shadow(rgb(0, 255, 0) 0 0 10px);
+        }
+
+        .status-error #injection-icon svg circle {
+            stroke: rgb(255, 0, 0);
+            fill: rgb(255, 0, 0);
+            filter: drop-shadow(rgb(255, 0, 0) 0 0 10px);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .injection-log-container {
+            margin-top: 10px;
+        }
+
+        .injection-log {
+            width: 100%;
+            height: 80px;
+            background: rgba(17, 0, 0, 0.8);
+            border: 2px solid rgba(139, 0, 0, 0.5);
+            border-radius: 6px;
+            color: #B22222;
+            font-size: 11px;
+            font-family: "Courier New", monospace;
+            padding: 10px;
+            resize: none;
+            outline: none;
+            transition: 0.3s;
+            text-shadow: rgba(139, 0, 0, 0.8) 0 0 5px;
+        }
+
+        .injection-log:focus {
+            border-color: #8B0000;
+            box-shadow: 0 0 15px rgba(139, 0, 0, 0.6);
+        }
+
+        .functions-activated {
+            background: rgba(17, 0, 0, 0.9);
+            border: 2px solid rgba(139, 0, 0, 0.5);
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 8px;
+            font-size: 12px;
+            max-height: 80px;
+            overflow-y: auto;
+            animation: slideIn 0.5s ease-out;
+            box-shadow: rgba(139, 0, 0, 0.3) 0 0 20px;
+        }
+
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .functions-activated h5 {
+            margin: 0 0 8px;
+            color: #B22222;
+            font-size: 13px;
+            text-shadow: 0 0 10px rgba(139, 0, 0, 0.6);
+            letter-spacing: 1px;
+            animation: textGlow 2s ease infinite alternate;
+        }
+
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 5px rgba(139, 0, 0, 0.6); }
+            100% { text-shadow: 0 0 15px rgba(139, 0, 0, 0.6); }
+        }
+
+        .function-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 4px 0;
+            padding: 4px;
+            border-radius: 4px;
+            background: rgba(139, 0, 0, 0.2);
+            animation: popIn 0.3s ease-out backwards;
+            color: #FFB6C1;
+        }
+
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .function-check {
+            color: #B22222;
+            font-size: 12px;
+            text-shadow: rgba(139, 0, 0, 0.8) 0 0 8px;
+            animation: bounce 1s ease infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+
+        .info p {
+            margin: 6px 0;
+            font-size: 12px;
+            color: #FFB6C1;
+            text-shadow: 0 0 5px rgba(139, 0, 0, 0.6);
+            animation: fadeIn 0.5s ease-out backwards;
+            padding-left: 10px;
+            border-left: 2px solid #8B0000;
+        }
+
+        .info p:nth-child(1) { animation-delay: 0.1s; }
+        .info p:nth-child(2) { animation-delay: 0.2s; }
+        .info p:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .tab {
+            display: none;
+        }
+
+        .tab.active {
+            display: block;
+        }
+
+        #dev-btn {
+            margin-top: 10px;
+            width: 100%;
+            height: 36px;
+            border-radius: 8px;
+            background: linear-gradient(145deg, rgba(34, 0, 0, 0.8), rgba(26, 0, 0, 0.8));
+            color: #B22222;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            text-shadow: 0 0 5px rgba(139, 0, 0, 0.6);
+            border: 2px solid rgba(139, 0, 0, 0.5);
+        }
+
+        #dev-btn:hover {
+            background: linear-gradient(145deg, #8B0000, #B22222);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(139, 0, 0, 0.6);
+            border-color: #8B0000;
+        }
+
         @media (max-width: 600px) {
             .logo h1 {
                 font-size: 2.2em;
@@ -157,33 +671,330 @@
                 flex-direction: column;
                 gap: 15px;
             }
+
+            .content {
+                grid-template-columns: 50px 1fr;
+            }
+
+            .tabbtn {
+                width: 38px;
+                height: 38px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="logo">
-            <h1>Macabra_XR</h1>
-            <h2>Painel</h2>
+    <div class="main-container">
+        <!-- SEÇÃO DO HEADER -->
+        <div class="header-section">
+            <div class="logo">
+                <h1>Macabra_XR</h1>
+                <h2>Painel</h2>
+            </div>
+
+            <div class="contact-section">
+                <a href="https://wa.me/258868101222" class="whatsapp-link" target="_blank">
+                    📱 WhatsApp
+                </a>
+                <p class="contact-text">
+                    Clique para fazer sua compra
+                </p>
+            </div>
+
+            <div class="social-links">
+                <a href="https://www.tiktok.com/@macabra777_" class="social-link" target="_blank">
+                    <i class="fa-brands fa-tiktok"></i> TikTok
+                </a>
+                <a href="https://instagram.com/macabra_xr" class="social-link" target="_blank">
+                    <i class="fa-brands fa-instagram"></i> Instagram
+                </a>
+            </div>
         </div>
 
-        <div class="whatsapp-section">
-            <a href="https://wa.me/258868101222" class="whatsapp-link" target="_blank">
-                📱 +258 868 101 222
-            </a>
-            <p style="color: #FFB6C1; margin-top: 15px; font-size: 0.9em;">
-                Clique para fazer sua compra
-            </p>
-        </div>
+        <!-- SEÇÃO DO PAINEL -->
+        <div class="panel-container">
+            <div class="card" id="app">
+                <div class="titlebar">Macabra_XR</div>
+                <div class="content">
+                    <div class="sidebar">
+                        <button class="tabbtn active" data-tab="aim">
+                            <i class="fa-solid fa-crosshairs"></i>
+                        </button>
+                        <button class="tabbtn" data-tab="cfg">
+                            <i class="fa-solid fa-gear"></i>
+                        </button>
+                        <button class="tabbtn" data-tab="injection">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+                                <path d="M12 5V19" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+                                <path d="M3 3L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+                                <path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+                                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"></circle>
+                            </svg>
+                        </button>
+                        <button class="tabbtn" data-tab="info">
+                            <i class="fa-solid fa-address-card"></i>
+                        </button>
+                    </div>
+                    <div class="main">
+                        <!-- Aba AIM -->
+                        <div class="tab active" id="aim">
+                            <div class="sep"></div>
+                            <div class="row">
+                                <label class="ck" id="aimbot-toggle-label">
+                                    <input type="checkbox" id="aimbot-toggle">
+                                    <span class="box"></span>
+                                    <span class="label-text">Aimbot legit</span>
+                                </label>
+                            </div>
+                            
+                            <div class="row single">
+                                <div class="bone-row">
+                                    <span class="bone-label">Puxada</span>
+                                    <div class="bone-controls">
+                                        <select id="boneSelect">
+                                            <option value="head">Cabeça</option>
+                                            <option value="chest">Peito</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row radio">
+                                <label class="ck" id="aim-look-label">
+                                    <input type="radio" name="aim" value="look" id="aim-look">
+                                    <span class="box"></span>
+                                    <span class="label-text">Ao Olhar</span>
+                                </label>
+                                <label class="ck" id="aim-shoot-label">
+                                    <input type="radio" name="aim" value="shoot" id="aim-shoot" checked>
+                                    <span class="box"></span>
+                                    <span class="label-text">Ao Atirar</span>
+                                </label>
+                            </div>
+                        </div>
 
-        <div class="social-links">
-            <a href="https://instagram.com/macabra_xr" class="social-link" target="_blank">
-                📷 Instagram
-            </a>
-            <a href="https://tiktok.com/@macabra777_" class="social-link" target="_blank">
-                🎵 TikTok
-            </a>
+                        <!-- Aba CFG -->
+                        <div class="tab" id="cfg">
+                            <div class="sep"></div>
+                            <div class="section">
+                                <h4><i class="fa-solid fa-triangle-exclamation"></i> Funções Rage</h4>
+                                <div class="row">
+                                    <label class="ck" id="aimkill-label">
+                                        <input type="checkbox" id="Aimkill">
+                                        <span class="box"></span>
+                                        <span class="label-text">+120 FPS</span>
+                                    </label>
+                                    <label class="ck" id="teleport-label">
+                                        <input type="checkbox" id="teleport">
+                                        <span class="box"></span>
+                                        <span class="label-text">Melhorar Precisão</span>
+                                    </label>
+                                </div>
+                                <div class="row">
+                                    <label class="ck" id="speed-label">
+                                        <input type="checkbox" id="speed">
+                                        <span class="box"></span>
+                                        <span class="label-text">Aumentar Deslize</span>
+                                    </label>
+                                    <label class="ck" id="no-recoil-label">
+                                        <input type="checkbox" id="no-recoil">
+                                        <span class="box"></span>
+                                        <span class="label-text">No Recoil</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Aba INJECTION -->
+                        <div class="tab" id="injection">
+                            <div class="sep"></div>
+                            <div class="injection-buttons">
+                                <button class="btn-inject" id="inject-ff-btn">
+                                    <span class="btn-icon">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+                                            <path d="M12 5V19" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+                                            <path d="M3 3L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+                                            <path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+                                            <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"></circle>
+                                        </svg>
+                                    </span> 
+                                    Injetar no FF
+                                </button>
+                                <button class="btn-inject" id="inject-ffmax-btn">
+                                    <span class="btn-icon">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+                                            <path d="M12 5V19" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+                                            <path d="M3 3L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+                                            <path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+                                            <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"></circle>
+                                        </svg>
+                                    </span> 
+                                    Injetar no FF MAX
+                                </button>
+                            </div>
+                            
+                            <div class="injection-status" id="injection-status-box">
+                                <div class="status-indicator">
+                                    <span id="injection-icon">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <circle cx="12" cy="12" r="10" stroke="#FFB6C1" stroke-width="2"></circle>
+                                        </svg>
+                                    </span>
+                                    <span id="injection-status">Aguardando injeção...</span>
+                                </div>
+                            </div>
+                            
+                            <div class="functions-activated hidden" id="functions-list">
+                                <h5>Funções Ativadas:</h5>
+                                <div id="functions-container"></div>
+                            </div>
+                            
+                            <div class="injection-log-container">
+                                <textarea id="injection-log" readonly class="injection-log"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Aba INFO -->
+                        <div class="tab" id="info">
+                            <div class="sep"></div>
+                            <div class="info">
+                                <p>Versão 1.118.7</p>
+                                <p>Expira em: 31/12/2026</p>
+                                <p>WhatsApp: +258 868 101 222</p>
+                            </div>
+                            <button id="dev-btn">Macabra_XR Premium</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+    <script>
+        // Sistema de Tabs
+        document.querySelectorAll('.tabbtn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.tabbtn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                
+                this.classList.add('active');
+                
+                const tabId = this.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Sistema de Injeção
+        function addLog(message) {
+            const log = document.getElementById('injection-log');
+            const timestamp = new Date().toLocaleTimeString();
+            log.value += `[${timestamp}] ${message}\n`;
+            log.scrollTop = log.scrollHeight;
+        }
+
+        function updateInjectionStatus(status, message, statusClass) {
+            const statusBox = document.getElementById('injection-status-box');
+            const statusText = document.getElementById('injection-status');
+            
+            statusBox.classList.remove('status-injecting', 'status-success', 'status-error');
+            
+            if (statusClass) {
+                statusBox.classList.add(statusClass);
+            }
+            
+            statusText.textContent = message;
+        }
+
+        function getActiveFunctions() {
+            const functions = [];
+            
+            if (document.getElementById('aimbot-toggle').checked) {
+                functions.push('Aimbot Legit');
+            }
+            if (document.getElementById('Aimkill').checked) {
+                functions.push('+120 FPS');
+            }
+            if (document.getElementById('teleport').checked) {
+                functions.push('Melhorar Precisão');
+            }
+            if (document.getElementById('speed').checked) {
+                functions.push('Aumentar Deslize');
+            }
+            if (document.getElementById('no-recoil').checked) {
+                functions.push('No Recoil');
+            }
+            
+            return functions;
+        }
+
+        function displayActiveFunctions(functions) {
+            const functionsContainer = document.getElementById('functions-container');
+            const functionsList = document.getElementById('functions-list');
+            
+            if (functions.length > 0) {
+                functionsContainer.innerHTML = '';
+                functions.forEach(func => {
+                    const item = document.createElement('div');
+                    item.className = 'function-item';
+                    item.innerHTML = `<span class="function-check">✓</span><span>${func}</span>`;
+                    functionsContainer.appendChild(item);
+                });
+                functionsList.classList.remove('hidden');
+            } else {
+                functionsList.classList.add('hidden');
+            }
+        }
+
+        async function performInjection(game) {
+            const functions = getActiveFunctions();
+            
+            addLog(`Iniciando injeção no ${game}...`);
+            updateInjectionStatus('injecting', 'Injetando...', 'status-injecting');
+            
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            
+            addLog('Carregando módulos Macabra_XR...');
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            addLog('Verificando proteção anti-cheat...');
+            await new Promise(resolve => setTimeout(resolve, 1200));
+            
+            if (functions.length > 0) {
+                addLog('Ativando funções selecionadas...');
+                functions.forEach((func, index) => {
+                    setTimeout(() => addLog(`✓ ${func} ativado`), index * 300);
+                });
+                await new Promise(resolve => setTimeout(resolve, functions.length * 300 + 500));
+            }
+            
+            addLog(`✓ Injeção Macabra_XR concluída no ${game}!`);
+            updateInjectionStatus('success', 'Injeção concluída!', 'status-success');
+            displayActiveFunctions(functions);
+            
+            setTimeout(() => {
+                updateInjectionStatus('waiting', 'Aguardando injeção...', '');
+            }, 5000);
+        }
+
+        document.getElementById('inject-ff-btn').addEventListener('click', () => {
+            performInjection('Free Fire');
+        });
+
+        document.getElementById('inject-ffmax-btn').addEventListener('click', () => {
+            performInjection('Free Fire MAX');
+        });
+
+        document.getElementById('dev-btn').addEventListener('click', () => {
+            addLog('Macabra_XR Premium | WhatsApp: +258 868 101 222');
+            window.open('https://wa.me/258868101222', '_blank');
+        });
+
+        addLog('Sistema Macabra_XR v1.118.7 carregado.');
+        addLog('Selecione as funções desejadas e clique em Injetar.');
+    </script>
 </body>
-</html>
+    </html>
+    
